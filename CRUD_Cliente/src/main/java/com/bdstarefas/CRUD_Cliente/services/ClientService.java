@@ -5,6 +5,7 @@ import com.bdstarefas.CRUD_Cliente.entities.Client;
 import com.bdstarefas.CRUD_Cliente.repositories.ClientRepository;
 import com.bdstarefas.CRUD_Cliente.services.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -54,7 +55,7 @@ public class ClientService {
     public void delete(Long id){
         try{
             repository.deleteById(id);
-        }catch(EntityNotFoundException e){
+        }catch(EmptyResultDataAccessException e){
             throw  new ResourceNotFoundException("Id not Found: " + id);
         }
     }
